@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block head %}
+{{ super() }}
+    <link rel="shortcut icon" href="../static/images/favicon/favicon.ico" type="image/x-icon">
+    <title>Principal</title>
+{% endblock %}
+
+<!--menu-->
+{% block menu %} 
+{{ super() }}
+
+{% endblock %}
+
+<!--header-->
+{% block header %}
+{{ super() }}
+
+    <h1>TAREFAS</h1>
+
+{% endblock %}
+
+<!--main-->
+{% block main %}
+{{ super() }}
+
+<table>
+    <thead>
+        <tr>
+            <th>Prioridade</th>
+            <th>Tarefa</th>
+            <th>Descrição</th>
+            <th>Tempo restante</th>
+            <th>Começo</th>
+            <th>Término</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ priority }}</td>
+                <td>{{ task }}</td>
+                <td>{{ description }}</td>
+                <td>{{ remaining_time }}</td>
+                <td>{{ start }}</td>
+                <td>{{ ending }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

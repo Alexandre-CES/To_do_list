@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block head %} <title>Register</title> {% endblock %}
+{% block menu %} {% endblock %}
+{% block header %}{% endblock %}
+
+
+{% block main %}
+
+<form action="/register" method="post">
+    <div>
+        <input autocomplete="off" required min="1" max="20" name="username" placeholder="Nome" type="text"> 
+    </div>
+    <div>
+        <input autocomplete="off" required min="1" max="20" name="user" placeholder="Usuário" type="text">
+    </div>
+    <div>
+        <input autocomplete="off" required name="password" placeholder="senha" type="password">
+    </div>
+    <div>
+        <input autocomplete="off" required name="confirm_password" placeholder="confirmar senha" type="password">
+    </div>
+    <button type="submit">Registrar</button>
+</form>
+
+{% endblock %}
