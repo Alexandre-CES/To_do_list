@@ -43,7 +43,7 @@ class Task(db.Model):
     task_id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     priority = db.Column(db.Integer, nullable=False)
-    task = db.Column(db.String(50), nullable=False)
+    task = db.Column(db.String(42), nullable=False)
     description = db.Column(db.String(245), nullable=False)
     remaining_time = db.Column(db.String(20), nullable=False)
     start = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
@@ -121,10 +121,21 @@ def index():
 @login_required
 def add_task():
     if request.method == 'POST':
-        pass
-    
+
+        priority = request.form.get('priority')
+        task = request.form.get('task')
+        description = request.form.get('description')
+        start = request.form.get('start')
+        ending = request.form.get('ending')
+
+        if not priority or not task:
+            return apology('Precisa ter ao menos a tarefa e a prioridade(Se não tem prioridade você está provavelmente mechendo com o que não deve)', 403)
+        
+
+
     else:
-        return render_template('add_task.html')
+        priorities = [0,1,2,3]
+        return render_template('add_task.html', priorities=priorities)
 
 @app.route('/friends')
 @login_required

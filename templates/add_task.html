@@ -13,30 +13,40 @@
 
 <section id="add_task_section">
     <form action="/add_task" method="post">
-        <div>
+
+        <div class="div_item_add_task">
             <span>Prioridade:</span>
             <select required name="priority" id="priority">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+
+                {% for priority in priorities %}
+                    <option value="{{ priority }}"> {{ priority }}</option>
+                {% endfor %}
+
             </select>
         </div>
-        <div>
+
+        <div id="add_task_tarefa" class="div_item_add_task">
             <span>Tarefa:</span>
-            <input required type="text" name="task" id="task">
+            <input required placeholder="Máximo 42 letras incluindo espaços" min="1" max="42" type="text" name="task" id="task">
         </div>
 
-        <div>Descrição:</div>
-        <div id="description">    
-            <textarea  placeholder="Breve descrição da tarefa (maximo 245 letras contando os espaços)" name="description" id="description" cols="30" rows="10" maxlength="245"></textarea>
-        </div>
-        <div>
-            <input type="date" name="" id="">
-            <input type="datetime" name="" id="">
-            <input type="datetime-local" name="" id="">
+        <div class="div_item_add_task">
+            <div>Descrição:</div>
+            <div id="description">    
+                <textarea  placeholder="Breve descrição da tarefa (maximo 245 letras contando os espaços)" name="description" id="description" cols="30" rows="10" maxlength="245"></textarea>
+            </div>
         </div>
         
+        <div class="div_item_add_task">
+            <span>Começo: </span>
+            <input type="datetime-local" name="start" id="start">
+        </div>
+        <div class="div_item_add_task">
+            <span>Término: </span>
+            <input type="datetime-local" name="ending" id="ending">
+        </div>
+
+        <button id="button_add_task" type="submit">Adicionar</button>
     </form>
 </section>
 

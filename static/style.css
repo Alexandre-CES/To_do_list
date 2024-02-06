@@ -123,11 +123,43 @@ thead > tr > th{
 /* Add task page */
 section#add_task_section{
     width: 400px;
-    height: 300px;
-    margin: 30px auto;
+    height: 305px;
+    margin: 50px auto;
     padding: 10px;
 
-    background-color: var(--color1);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.486);
+
+    background-color: var(--color4);
+}
+
+div.div_item_add_task{
+    width: 100%;
+
+    margin: 10px 0px;
+
+    font:normal 1.1em var(--fontText);
+    color: var(--color2);
+}
+
+div.div_item_add_task > div{
+    
+    text-align: center;
+}
+
+div.div_item_add_task select{
+    background-color: var(--color2);
+}
+
+div.div_item_add_task input{
+    background-color: var(--color2);
+}
+
+div.div_item_add_task input::placeholder{
+    color: var(--color5);
+}
+
+div#add_task_tarefa input{
+    width: calc(100% - 60px);
 }
 
 div#description textarea{
@@ -135,4 +167,29 @@ div#description textarea{
     height: 90px;
     
     padding: 5px;
+
+    background-color: var(--color2);
+}
+
+div#description textarea::placeholder{
+    color: var(--color5);
+}
+
+button#button_add_task{
+    display: block;
+    margin: -10px 0px 0px 300px;
+    text-align: center;
+    padding: 5px 5px;
+
+    cursor: pointer;
+
+    font:bold 1em var(--fontMenu);
+    color: var(--color5);
+
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.26);
+    background-color: var(--color2);
+}
+button#button_add_task:hover{
+    color: var(--color4);
+    background-color: var(--color1);
 }
