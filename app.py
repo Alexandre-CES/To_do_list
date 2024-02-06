@@ -30,9 +30,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
 Session(app)
 db = SQLAlchemy(app)
 
-#ter certeza de que a tabela existe
-
-
 #definir tabela sql
 class User(db.Model):
     __tablename__ = 'users'
@@ -47,12 +44,12 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     priority = db.Column(db.Integer, nullable=False)
     task = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(245), nullable=False)
     remaining_time = db.Column(db.String(20), nullable=False)
     start = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     ending = db.Column(db.DateTime, nullable=False)
 
-
+#ter certeza de que a tabela existe
 with app.app_context():
     db.create_all()
 
@@ -119,6 +116,15 @@ def index():
     tasks = tasks = Task.query.all()
 
     return render_template('index.html', tasks=tasks)
+
+@app.route('/add_task', methods=['GET', 'POST'])
+@login_required
+def add_task():
+    if request.method == 'POST':
+        pass
+    
+    else:
+        return render_template('add_task.html')
 
 @app.route('/friends')
 @login_required

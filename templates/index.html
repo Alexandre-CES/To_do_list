@@ -3,6 +3,7 @@
 {% block head %}
 {{ super() }}
     <link rel="shortcut icon" href="../static/images/favicon/favicon.ico" type="image/x-icon">
+    <script src="../dom.js"></script> 
     <title>Principal</title>
 {% endblock %}
 
@@ -24,29 +25,30 @@
 {% block main %}
 {{ super() }}
 
-<table>
-    <thead>
-        <tr>
-            <th>Prioridade</th>
-            <th>Tarefa</th>
-            <th>Descrição</th>
-            <th>Tempo restante</th>
-            <th>Começo</th>
-            <th>Término</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for task in tasks %}
+<div id="div_table">
+    <table>
+        <thead>
             <tr>
-                <td>{{ priority }}</td>
-                <td>{{ task }}</td>
-                <td>{{ description }}</td>
-                <td>{{ remaining_time }}</td>
-                <td>{{ start }}</td>
-                <td>{{ ending }}</td>
+                <th>Prioridade</th>
+                <th>Tarefa</th>
+                <th>Descrição</th>
+                <th>Tempo restante</th>
+                <th>Começo</th>
+                <th>Término</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ priority }}</td>
+                    <td>{{ task }}</td>
+                    <td>{{ description }}</td>
+                    <td>{{ remaining_time }}</td>
+                    <td>{{ start }}</td>
+                    <td>{{ ending }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

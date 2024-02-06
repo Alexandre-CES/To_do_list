@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block head %}
+{{ super() }}
+
+ <title>Adicionar Tarefa</title> 
+{% endblock %}
+
+{% block header %}
+    <h1>Adicionar Tarefa</h1>
+{% endblock %}
+
+{% block main %}
+
+<section id="add_task_section">
+    <form action="/add_task" method="post">
+        <div>
+            <span>Prioridade:</span>
+            <select required name="priority" id="priority">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div>
+            <span>Tarefa:</span>
+            <input required type="text" name="task" id="task">
+        </div>
+
+        <div>Descrição:</div>
+        <div id="description">    
+            <textarea  placeholder="Breve descrição da tarefa (maximo 245 letras contando os espaços)" name="description" id="description" cols="30" rows="10" maxlength="245"></textarea>
+        </div>
+        <div>
+            <input type="date" name="" id="">
+            <input type="datetime" name="" id="">
+            <input type="datetime-local" name="" id="">
+        </div>
+        
+    </form>
+</section>
+
+{% endblock %}

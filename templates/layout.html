@@ -10,31 +10,6 @@
     <title>Layout</title>
 </head>
 <body>
-    <menu id="menu_lateral">
-        {% block menu %}
-            <div id="expendir_menu_lateral">
-                <i class="bi bi-list"></i>
-            </div>
-            <ul id="lista_menu_lateral">
-                <li class="item_menu">
-                    <a href="{{ url_for('index') }}">
-                        <span class="menu_icon">
-                            <i class="bi bi-house"></i>
-                        </span>
-                        <span class="txt_link">Home</span>
-                    </a>
-                </li>
-                <li class="item_menu">
-                    <a href="{{ url_for('friends') }}">
-                        <span class="menu_icon">
-                            <i class="bi bi-people"></i>
-                        </span>
-                        <span class="txt_link">Amigos</span>
-                    </a>
-                </li>
-            </ul>
-        {% endblock %}
-    </menu>
     <header>
         {% block header %}
             
@@ -44,5 +19,29 @@
     <main>
         {% block main %}{% endblock %}
     </main>
+    <menu id="side_menu">
+        {% block menu %}
+            <div id="span_side_menu">
+                <i class="bi bi-list"></i>
+            </div>
+            <ul>
+                <li>
+                    <a href="{{ url_for('index') }}">
+                        <i class="bi bi-house"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('add_task') }}">
+                        <i class="bi bi-plus-circle"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('friends') }}">
+                        <i class="bi bi-people"></i>
+                    </a>
+                </li>
+            </ul>
+        {% endblock %}
+    </menu>
 </body>
 </html>
