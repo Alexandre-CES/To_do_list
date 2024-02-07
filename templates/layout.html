@@ -10,17 +10,20 @@
     <title>Layout</title>
 </head>
 <body>
+
+    {% if not hide_header %}
     <header>
         {% block header %}
             
         {% endblock %}
     </header>
-    
+    {% endif %}
+
     <main>
         {% block main %}{% endblock %}
     </main>
+    {% block menu %}
     <menu id="side_menu">
-        {% block menu %}
             <div id="span_side_menu">
                 <i class="bi bi-list"></i>
             </div>
@@ -41,7 +44,8 @@
                     </a>
                 </li>
             </ul>
-        {% endblock %}
+        
     </menu>
+    {% endblock %}
 </body>
 </html>

@@ -18,7 +18,6 @@ from helpers import login_required, apology
 #gerenciador de database
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-import sqlite3
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True 
@@ -44,10 +43,9 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     priority = db.Column(db.Integer, nullable=False)
     task = db.Column(db.String(42), nullable=False)
-    description = db.Column(db.String(245), nullable=False)
-    remaining_time = db.Column(db.String(20), nullable=False)
+    description = db.Column(db.String(245))
     start = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    ending = db.Column(db.DateTime, nullable=False)
+    ending = db.Column(db.DateTime, nullable=True)
 
 #ter certeza de que a tabela existe
 with app.app_context():
@@ -79,7 +77,7 @@ def register():
 
         return redirect(url_for('login'))
     else:
-        return render_template('register.html')
+        return render_template('register.html', hide_header=True)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -106,14 +104,26 @@ def login():
 
         return redirect(url_for('index'))
     else:
-        return render_template('login.html')
+        return render_template('login.html', hide_header=True)
 
 
 @app.route('/')
 @login_required
 def index():
 
-    tasks = tasks = Task.query.all()
+    id = session['user_id']
+
+    tasks = tasks = Task.query.filter_by(user_id=id).all()
+
+    if tasks:
+        for task in tasks:
+            task.start = task.start.strftime('%d-%m-%y %H:%M')
+
+            if task.ending:
+                task.ending = task.ending.strftime('%d-%m-%y %H:%M')
+            else:
+                task.ending = ' '
+
 
     return render_template('index.html', tasks=tasks)
 
@@ -122,16 +132,35 @@ def index():
 def add_task():
     if request.method == 'POST':
 
+        id = session['user_id']
+
         priority = request.form.get('priority')
         task = request.form.get('task')
         description = request.form.get('description')
         start = request.form.get('start')
         ending = request.form.get('ending')
+        print(start)
 
         if not priority or not task:
             return apology('Precisa ter ao menos a tarefa e a prioridade(Se não tem prioridade você está provavelmente mechendo com o que não deve)', 403)
-        
+        if len(description) > 245 or len(task) > 42 or len(task) < 1:
+            apology('como você digitou mais/menos que o permitido? está fazendo coisas ilícitas, rapaz?', 403)
+        if start:
+            start = datetime.strptime(start, '%Y-%m-%dT%H:%M')
+        else:                           
+            start = datetime.now().strftime('%Y-%m-%dT%H:%M')
+            start = datetime.strptime(start, '%Y-%m-%dT%H:%M')
+        if ending:
+            ending = datetime.strptime(ending, '%Y-%m-%dT%H:%M')
+        else:
+            ending = None    
 
+        new_task = Task(user_id=id, priority=priority, task=task, description=description, start=start, ending=ending)
+        db.session.add(new_task)
+        db.session.commit()
+
+        return redirect(url_for('index'))
+        
 
     else:
         priorities = [0,1,2,3]

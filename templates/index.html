@@ -7,12 +7,6 @@
     <title>Principal</title>
 {% endblock %}
 
-<!--menu-->
-{% block menu %} 
-{{ super() }}
-
-{% endblock %}
-
 <!--header-->
 {% block header %}
 {{ super() }}
@@ -40,15 +34,21 @@
         <tbody>
             {% for task in tasks %}
                 <tr>
-                    <td>{{ priority }}</td>
-                    <td>{{ task }}</td>
-                    <td>{{ description }}</td>
-                    <td>{{ remaining_time }}</td>
-                    <td>{{ start }}</td>
-                    <td>{{ ending }}</td>
+                    <td>{{ task['priority'] }}</td>
+                    <td>{{ task['task'] }}</td>
+                    <td id="description">{{ task['description'] }}</td>
+                    <td>0</td>
+                    <td class="table_datetime">{{ task['start'] }}</td>
+                    <td class="table_datetime">{{ task['ending'] }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+{% endblock %}
+
+<!--menu-->
+{% block menu %} 
+{{ super() }}
+
 {% endblock %}

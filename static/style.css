@@ -24,6 +24,81 @@ body{
     background-color: white;
 }
 
+/* register / login */
+
+div#register{
+    width: 300px;
+    height: 320px;
+}
+
+div#login{
+    width: 300px;
+    height: 230px;
+}
+
+div.register_login{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding-top: 20px;
+
+    border: 1px solid var(--color5);
+    background-image: linear-gradient(to bottom, var(--color5) 70%, var(--color4) 100%);
+}
+
+div.register_login form div{
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+}
+
+div.register_login form div input{
+    height: 40px;
+    padding: 1px 10px;
+
+    font:normal 1.2em var(--fontMenu);
+    background-color: var(--color2);
+}
+
+div.register_login form button{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+
+    margin: 20px 0px 10px 0px;
+
+    width: 100px;
+    height: 40px;
+
+    background-color: var(--color2);
+}
+
+div.register_login p{
+    text-align: center;
+
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.363);
+    color: var(--color1);
+}
+
+div.register_login p a{
+    text-align: center;
+    
+    text-decoration: none;
+
+    font-weight: bold;
+    text-shadow: rgba(0, 0, 0, 0.479);
+    color: var(--color2);
+}
+
+div.register_login p a:hover{
+
+    font:bolder;
+
+    color: var(--color1);
+}
+
+/* menu */
 menu#side_menu{
     position: fixed;
     top: 0;
@@ -91,6 +166,7 @@ header{
     background-color: var(--color5);
 }
 
+/* table */
 div#div_table{
     overflow-x: auto;
 }
@@ -99,16 +175,16 @@ table,td,th{
     border-collapse: collapse;
 
     padding: 3px 10px;
-
-    border: 1px solid var(--color1);
 }
 
 table{
+    table-layout: fixed;
+
+    max-width: 1000px;
     margin: 30px auto;
     position: relative;
-
     
-    
+    border: 1px solid var(--color5);
 }
 
 thead > tr > th{
@@ -117,7 +193,22 @@ thead > tr > th{
     text-shadow: 1px 1px black;
 
     color: var(--color2);
+    border: 1px solid var(--color1);
     background-color: var(--color5);
+}
+
+td{
+    min-width: 100px;
+    border: 1px solid var(--color5);
+}
+
+td.table_datetime{
+    word-wrap:break-word;
+    max-width: 500px;
+}
+
+td.table_datetime{
+    text-align: center;
 }
 
 /* Add task page */
