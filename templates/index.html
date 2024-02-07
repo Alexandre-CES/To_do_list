@@ -2,7 +2,6 @@
 
 {% block head %}
 {{ super() }}
-    <link rel="shortcut icon" href="../static/images/favicon/favicon.ico" type="image/x-icon">
     <script src="../dom.js"></script> 
     <title>Principal</title>
 {% endblock %}
@@ -49,6 +48,11 @@
 
 <!--menu-->
 {% block menu %} 
+{{ super() }}
+
+{% endblock %}
+
+{% block script %}
 {{ super() }}
 
 {% endblock %}

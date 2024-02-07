@@ -126,24 +126,23 @@ div#span_side_menu > i{
     cursor: pointer;
 }
 
-menu#side_menu > ul{
+ul#side_menu_ul{
     height: 100%;
 
     list-style-type: none;
 }
 
-menu#side_menu > ul > li{
+ul#side_menu_ul > li{
     padding-left: 10px;
 
-    transition: .2s;
+    transition: background-color 0.5s ease;
 }
 
-menu#side_menu >ul > li:hover{
-
+ul#side_menu_ul > li:hover{
     background-color: var(--color4);
 }
 
-menu#side_menu > ul > li >a{
+ul#side_menu_ul > li >a{
     display: flex;
 
     padding: 20px 3px;
