@@ -29,7 +29,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
 Session(app)
 db = SQLAlchemy(app)
 
-#definir tabela sql
+#definir tabelas sql
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -46,6 +46,18 @@ class Task(db.Model):
     description = db.Column(db.String(245))
     start = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     ending = db.Column(db.DateTime, nullable=True)
+
+class Request(db.Model):
+    __tablename__ = 'requests'
+    request_id = db.Column(db.Integer, primary_key=True, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    requested_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+class Friend(db.Model):
+    __tablename__ = 'friends'
+    friendship_id = db.Column(db.Integer, primary_key=True, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    friend_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)    
 
 #ter certeza de que a tabela existe
 with app.app_context():
@@ -171,6 +183,54 @@ def add_task():
 def friends():
 
     return render_template('friends.html')
+
+@app.route('/add_friend', methods=['GET','POST'])
+@login_required
+def add_friend():
+
+    id = session['user_id']
+
+    if request.method == 'POST':
+        
+        friend_request = request.form.get('request_id')
+
+        if not friend_request:
+            return apology('Está a tentar enviar pedido para o vazio?', 403) 
+        
+        user_requested = User.query.filter_by(id=friend_request).first()
+
+        if not user_requested:
+            return apology('esse usuário não existe', 403)
+
+        return redirect(url_for('add_friend'))
+    else:
+        return render_template('add_friend.html', user_id=id)
+
+#aceitar solicitação de amizade
+@app.route('/accept_friend_request/<int:request_id>')
+def accept_friend_request(request_id):
+    # Lógica para aceitar a solicitação de amizade com o ID fornecido
+    # Isso pode envolver alterar o status da solicitação na sua base de dados
+    # e adicionar uma nova entrada na tabela de amizades
+    # Exemplo:
+    # friend_request = FriendRequest.query.get(request_id)
+    # friend_request.accept()
+    # db.session.commit()
+    return "Solicitação de amizade aceita com sucesso!"
+
+#recusar solicitação de amizade
+@app.route('/reject_friend_request/<int:request_id>')
+def reject_friend_request(request_id):
+    # Lógica para recusar a solicitação de amizade com o ID fornecido
+    # Isso pode envolver simplesmente excluir a solicitação da base de dados
+    # Exemplo:
+    # friend_request = FriendRequest.query.get(request_id)
+    # db.session.delete(friend_request)
+    # db.session.commit()
+    return "Solicitação de amizade recusada com sucesso!"
+
+
+
 
 #Para erros de servidor: Made by chatgpt3.5
 for code, exception in default_exceptions.items():

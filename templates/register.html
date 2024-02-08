@@ -11,26 +11,26 @@
 
 
 {% block main %}
-
-<div id="register" class="register_login">
-    <form action="/register" method="post">
-        <div>
-            <input autocomplete="off" autofocus required min="1" max="20" name="username" placeholder="Nome" type="text"> 
-        </div>
-        <div>
-            <input autocomplete="off" required min="1" max="20" name="user" placeholder="Usuário" type="text">
-        </div>
-        <div>
-            <input autocomplete="off" required name="password" placeholder="senha" type="password">
-        </div>
-        <div>
-            <input autocomplete="off" required name="confirm_password" placeholder="confirmar senha" type="password">
-        </div>
-        <button type="submit">Registrar</button>
-    </form>
-    <p>Já está registrado? <a href="{{ url_for('login') }}">Logar</a></p>
+<div class="register_login_background">
+    <div id="register" class="register_login">
+        <form action="/register" method="post">
+            <div>
+                <input autocomplete="off" autofocus required min="1" max="20" name="username" placeholder="Nome" type="text"> 
+            </div>
+            <div>
+                <input autocomplete="off" required min="1" max="20" name="user" placeholder="Usuário" type="text">
+            </div>
+            <div>
+                <input autocomplete="off" required name="password" placeholder="senha" type="password">
+            </div>
+            <div>
+                <input autocomplete="off" required name="confirm_password" placeholder="confirmar senha" type="password">
+            </div>
+            <button type="submit">Registrar</button>
+        </form>
+        <p>Já está registrado? <a href="{{ url_for('login') }}">Logar</a></p>
+    </div>
 </div>
-
 {% endblock %}
 
 {% block menu %}{% endblock %}

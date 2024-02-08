@@ -24,8 +24,19 @@ body{
     background-color: white;
 }
 
-/* register / login */
+/* "global" classes */
 
+div.outside_div_top{
+    height: 25px;
+    width: 400px;
+    
+    margin: 50px auto 0px;
+    
+    border-radius: 30px 30px 0px 0px;
+    background-color: var(--color5);
+}
+
+/* register / login */
 div#register{
     width: 300px;
     height: 320px;
@@ -34,6 +45,13 @@ div#register{
 div#login{
     width: 300px;
     height: 230px;
+}
+
+div.register_login_background{
+    width: 100vw;
+    height: 100vh;
+
+    background-image: linear-gradient(to bottom, var(--color3) 10%, var(--color1) 100%);
 }
 
 div.register_login{
@@ -70,6 +88,8 @@ div.register_login form button{
 
     width: 100px;
     height: 40px;
+
+    cursor: pointer;
 
     background-color: var(--color2);
 }
@@ -166,6 +186,7 @@ header{
 }
 
 /* table */
+
 div#div_table{
     overflow-x: auto;
 }
@@ -180,7 +201,7 @@ table{
     table-layout: fixed;
 
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 50px auto;
     position: relative;
     
     border: 1px solid var(--color5);
@@ -214,8 +235,10 @@ td.table_datetime{
 section#add_task_section{
     width: 400px;
     height: 305px;
-    margin: 50px auto;
+    margin: auto;
     padding: 10px;
+
+    border: 3px solid var(--color5);
 
     text-shadow: 1px 1px rgba(0, 0, 0, 0.486);
 
@@ -282,4 +305,98 @@ button#button_add_task{
 button#button_add_task:hover{
     color: var(--color4);
     background-color: var(--color1);
+}
+
+/* add_friends */
+
+section#add_friends_section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 400px;
+    height: 500px;
+    margin: auto;
+
+    position: relative;
+}
+
+div#show_requests{
+    position: absolute;
+
+    top: 0;
+    left: 0;
+}
+
+div#show_requests > ul{
+    flex-grow: 1;
+    list-style-type: none;
+}
+
+div#show_requests > ul li{
+    flex-grow: 1;
+    min-width: 281px;
+
+    border: 1px solid var(--color5);
+}
+
+div#show_requests > ul li h2,h3{
+
+    font:normal 1em var(--fontText);
+}
+
+div#show_requests > ul li a#add_friend_accept_link{
+    
+    background-color: greenyellow;
+}
+div#show_requests > ul li a#add_friend_reject_link{
+
+    background-color: rgba(255, 0, 0, 0.616);
+}
+
+div#request_friend{
+    position:absolute;
+
+    top: 0;
+    right: 0;
+
+    height: 80px;
+
+    border: 1px solid var(--color5);
+}
+
+div#request_friend h2{
+
+    text-align: center;
+
+    font: normal 1em var(--fontMenu); 
+    color: var(--color2);
+    background-color: var(--color4);
+}
+
+div#request_friend form div input{
+    width: 117px;
+
+    text-align: center;
+
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+div#request_friend form div input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+div#request_friend form button{
+    position: relative;
+
+    top: 5px;
+    left: 50%;
+
+    transform: translate(-50%);
+}
+
+div#request_friend p{
+    margin: 6px 0px 0px 0px;
+    text-align: center;
 }

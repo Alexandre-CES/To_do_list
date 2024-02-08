@@ -11,17 +11,19 @@
 
 {% block main %}
 
-<div id="login" class="register_login">
-    <form action="/login" method="post">
-        <div>
-            <input autocomplete="off" required autofocus name="user" placeholder="Usuário" type="text">
-        </div>
-        <div>
-            <input autocomplete="off" required autofocus name="password" placeholder="Senha" type="password">
-        </div>
-        <button type="submit">Logar</button>
-    </form>
-    <p>Não está registrado ainda? <a href="{{ url_for('register') }}">Registre-se</a></p>
+<div class="register_login_background">
+    <div id="login" class="register_login">
+        <form action="/login" method="post">
+            <div>
+                <input autocomplete="off" required autofocus name="user" placeholder="Usuário" type="text">
+            </div>
+            <div>
+                <input autocomplete="off" required autofocus name="password" placeholder="Senha" type="password">
+            </div>
+            <button type="submit">Logar</button>
+        </form>
+        <p>Não está registrado ainda? <a href="{{ url_for('register') }}">Registre-se</a></p>
+    </div>
 </div>
 {% endblock %}
 

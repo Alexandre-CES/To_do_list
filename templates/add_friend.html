@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block head %}
+{{ super() }}
+    <title>Adicionar Amigo</title>
+{% endblock %}
+{% block header %}
+{{ super() }}
+    <h1>Adicionar Amigo</h1>
+{% endblock %}
+
+{% block main %}
+{{ super() }}
+
+<div class="outside_div_top"></div>
+<section id="add_friends_section">
+    <div id="show_requests">
+        <ul>
+        {% for request in requests %}
+            <li>
+                <h2>{{ request['username'] }}</h2>
+                <h3>{{ request['user'] }}</h3>
+                <a href="/accept_friend_request/{{ request.user_id }}"><i class="bi bi-person-add"></i></a>
+                <a href="/reject_friend_request/{{ request.user_id }}"><i class="bi bi-dash-circle"></i></a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div id="request_friend">
+        <h2>Enviar pedido</h2>
+        <form action="/add_friend" method="post">
+            <div>
+                <input type="number" placeholder="ID" name="request_id" id="request_id">
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+        <p>ID: {{ user_id }}</p>
+    </div>
+</section>
+{% endblock %}
