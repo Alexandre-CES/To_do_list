@@ -189,48 +189,90 @@ def friends():
 def add_friend():
 
     id = session['user_id']
-
+ 
     if request.method == 'POST':
         
-        friend_request = request.form.get('request_id')
+        requested_id = request.form.get('requested_id')
 
-        if not friend_request:
+        if not requested_id:
             return apology('Está a tentar enviar pedido para o vazio?', 403) 
         
-        user_requested = User.query.filter_by(id=friend_request).first()
+        user_requested = User.query.filter_by(id=requested_id).first()
+        friend_request = Request.query.filter_by(user_id=id, requested_id=requested_id).first()
+        received_request = Request.query.filter_by(user_id=requested_id, requested_id=id).first()
 
+        #no caso de não existir
         if not user_requested:
             return apology('esse usuário não existe', 403)
+        elif int(requested_id) == int(id):
+            return apology('Está tentando enviar um pedido para você mesmo?', 403)
+        #no caso de enviar mais de uma vez
+        elif friend_request:
+            return redirect(url_for('add_friend'))
+        #no caso de já ter recebido uma solicitação da pessoa que enviou
+        elif received_request:
+            already_friends = Friend.query.filter_by(user_id=id, friend_id=requested_id).first()
+            if already_friends:
+                return apology('Vocês já são amigos', 403)
+            else:
+                db.session.delete(received_request)
+                new_friend = Friend(user_id=id, friend_id=requested_id)
+                db.session.add(new_friend)
+                db.session.commit()
+                new_friend = Friend(user_id=requested_id, friend_id=id)
+                db.session.add(new_friend)
+                db.session.commit()
+        else:
+            already_friends = Friend.query.filter_by(user_id=id, friend_id=requested_id).first()
+            if already_friends:
+                return apology('Vocês já são amigos', 403)
+            else:
+                new_request = Request(user_id=id, requested_id=requested_id)
+                db.session.add(new_request)
+                db.session.commit()
 
         return redirect(url_for('add_friend'))
     else:
-        return render_template('add_friend.html', user_id=id)
+        #tabela que contém usuários que enviaram pedido
+        requests = []
+        requests_ids = Request.query.filter_by(requested_id=id).all()
+        for reques in requests_ids:
+            user = User.query.filter_by(id=reques.user_id).first()
+            if user:
+                requests.append({'username':user.username, 'user': user.user, 'id':user.id})       
+
+        return render_template('add_friend.html', user_id=id, requests=requests)
 
 #aceitar solicitação de amizade
 @app.route('/accept_friend_request/<int:request_id>')
+@login_required
 def accept_friend_request(request_id):
-    # Lógica para aceitar a solicitação de amizade com o ID fornecido
-    # Isso pode envolver alterar o status da solicitação na sua base de dados
-    # e adicionar uma nova entrada na tabela de amizades
-    # Exemplo:
-    # friend_request = FriendRequest.query.get(request_id)
-    # friend_request.accept()
-    # db.session.commit()
-    return "Solicitação de amizade aceita com sucesso!"
+
+    id = session['user_id']
+
+    request =  Request.query.filter_by(user_id=request_id, requested_id=id).first()
+    db.session.delete(request)
+    db.session.commit()
+
+    new_friend = Friend(user_id=id, friend_id=request_id)
+    db.session.add(new_friend)
+    db.session.commit()
+    new_friend = Friend(user_id=request_id, friend_id=id)
+    db.session.add(new_friend)
+    db.session.commit()
+
+    return redirect(url_for('add_friend'))
 
 #recusar solicitação de amizade
 @app.route('/reject_friend_request/<int:request_id>')
 def reject_friend_request(request_id):
-    # Lógica para recusar a solicitação de amizade com o ID fornecido
-    # Isso pode envolver simplesmente excluir a solicitação da base de dados
-    # Exemplo:
-    # friend_request = FriendRequest.query.get(request_id)
-    # db.session.delete(friend_request)
-    # db.session.commit()
-    return "Solicitação de amizade recusada com sucesso!"
 
-
-
+    id = session['user_id']
+    
+    request =  Request.query.filter_by(user_id=request_id, requested_id=id).first()
+    db.session.delete(request)
+    db.session.commit()
+    return redirect(url_for('add_friend'))
 
 #Para erros de servidor: Made by chatgpt3.5
 for code, exception in default_exceptions.items():
