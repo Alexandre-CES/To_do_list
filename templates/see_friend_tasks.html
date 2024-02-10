@@ -1,22 +1,16 @@
 {% extends "layout.html" %}
-
-{% block head %}
+{% block head %} 
 {{ super() }}
-    <title>Principal</title>
+    <title>Taferas de {{ friend_username }}</title>
 {% endblock %}
 
-<!--header-->
 {% block header %}
 {{ super() }}
-
-    <h1>TAREFAS</h1>
-
+    <h1>Tarefas de {{ friend_username }}</h1>
 {% endblock %}
 
-<!--main-->
 {% block main %}
 {{ super() }}
-
 <div class="div_table">
     <table>
         <thead>
@@ -30,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for task in tasks %}
+            {% for task in friend_tasks %}
                 <tr class="table_task_tr">
                     <td class="td_priority">{{task['priority']}}</td>
                     <td>{{ task['task'] }}</td>
@@ -43,12 +37,6 @@
         </tbody>
     </table>
 </div>
-{% endblock %}
-
-<!--menu-->
-{% block menu %} 
-{{ super() }}
-
 {% endblock %}
 
 {% block script %}

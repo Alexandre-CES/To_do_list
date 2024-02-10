@@ -1,5 +1,3 @@
-import os
-
 from datetime import datetime
 
 from flask import Flask, request, redirect, render_template, url_for, session
@@ -17,7 +15,6 @@ from helpers import login_required, apology
 
 #gerenciador de database
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True 
@@ -129,10 +126,10 @@ def index():
 
     if tasks:
         for task in tasks:
-            task.start = task.start.strftime('%d-%m-%y %H:%M')
+            task.start = task.start.strftime('%d/%m/%y %H:%M')
 
             if task.ending:
-                task.ending = task.ending.strftime('%d-%m-%y %H:%M')
+                task.ending = task.ending.strftime('%d/%m/%y %H:%M')
             else:
                 task.ending = ' '
 
@@ -182,7 +179,46 @@ def add_task():
 @login_required
 def friends():
 
-    return render_template('friends.html')
+    id = session['user_id']
+
+    friends = []
+
+    user_friends = Friend.query.filter_by(user_id=id).all()
+
+    for user_friend in user_friends:
+        friend_info = User.query.filter_by(id=user_friend.friend_id).first()
+        if friend_info:
+            friends.append({'username':friend_info.username, 'user':friend_info.user, 'id':friend_info.id})
+
+    return render_template('friends.html', friends=friends)
+
+#olhar tabela do amiguinho
+@app.route('/see_friend_tasks/<int:friend_id>')
+@login_required
+def see_friend_task(friend_id):
+
+    id = session['user_id']
+
+    if not id:
+        return redirect(url_for('/login'))
+
+    is_friend = Friend.query.filter_by(user_id=id, friend_id=friend_id).first()
+    if not is_friend:
+        return apology('Ele não é seu amigo ou não existe', 403)
+    else:
+        friend_tasks = Task.query.filter_by(user_id=friend_id).all()
+
+        friend_user = User.query.filter_by(id=friend_id).first()
+        friend_username_info = friend_user.username
+
+        if len(friend_username_info) > 10:
+            friend_username = friend_username_info[:10]
+        else:
+            friend_username = friend_username_info        
+
+        return render_template('see_friend_tasks.html', friend_tasks=friend_tasks, friend_username=friend_username)
+
+
 
 @app.route('/add_friend', methods=['GET','POST'])
 @login_required
@@ -265,6 +301,7 @@ def accept_friend_request(request_id):
 
 #recusar solicitação de amizade
 @app.route('/reject_friend_request/<int:request_id>')
+@login_required
 def reject_friend_request(request_id):
 
     id = session['user_id']

@@ -187,7 +187,7 @@ header{
 
 /* table */
 
-div#div_table{
+div.div_table{
     overflow-x: auto;
 }
 
@@ -218,16 +218,27 @@ thead > tr > th{
 }
 
 td{
-    min-width: 100px;
     border: 1px solid var(--color5);
 }
 
-td.table_datetime{
+td.td_description{
     word-wrap:break-word;
-    max-width: 500px;
+    max-width: 300px;
 }
 
-td.table_datetime{
+td.table_datetime_start{
+    word-wrap:break-word;
+    max-width: 500px;
+    text-align: center;
+}
+
+td.table_datetime_ending{
+    word-wrap:break-word;
+    max-width: 500px;
+    text-align: center;
+}
+
+td.remaining_time_td{
     text-align: center;
 }
 
@@ -302,6 +313,7 @@ button#button_add_task{
     box-shadow: 1px 1px rgba(0, 0, 0, 0.26);
     background-color: var(--color2);
 }
+
 button#button_add_task:hover{
     color: var(--color4);
     background-color: var(--color1);
@@ -321,11 +333,32 @@ section#add_friends_section{
     position: relative;
 }
 
+section#add_friends_section h1{
+
+    text-align: center;
+
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.411);
+
+    font:normal 1.5em var(--fontMenu);
+    color: var(--color2);
+    background-color: var(--color4);
+}
+
 div#show_requests{
     position: absolute;
 
     top: 0;
     left: 0;
+
+    border: 1px solid var(--color5);
+
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.479);
+
+    background-color: var(--color2);
+}
+
+div#show_requests h1{
+    width: 268px;
 }
 
 div#show_requests > ul{
@@ -335,9 +368,9 @@ div#show_requests > ul{
 
 div#show_requests > ul li{
     flex-grow: 1;
-    min-width: 281px;
+    min-width: 268px;
 
-    border: 1px solid var(--color5);
+    border-top: 1px solid var(--color5);
 }
 
 div#show_requests > ul li h2,h3{
@@ -346,36 +379,44 @@ div#show_requests > ul li h2,h3{
 }
 
 div#show_requests > ul li a#add_friend_accept_link{
-    
+    color: var(--color5);
     background-color: greenyellow;
 }
 div#show_requests > ul li a#add_friend_reject_link{
-
+    color: var(--color5);
     background-color: rgba(255, 0, 0, 0.616);
 }
 
+div#show_requests a:visited{
+    color: var(--color5);
+}
+
+/* enviar pedido */
 div#request_friend{
     position:absolute;
 
     top: 0;
     right: 0;
 
-    height: 80px;
+    min-width: 130px;
+    height: 98px;
 
-    border: 1px solid var(--color5);
+    border-left: 0.5px solid var(--color4);
+    border-bottom: 1px solid var(--color5);
+    border-right: 1px solid var(--color5);
+
+    background-color: var(--color2);
 }
 
-div#request_friend h2{
-
-    text-align: center;
-
-    font: normal 1em var(--fontMenu); 
-    color: var(--color2);
-    background-color: var(--color4);
+div#request_friend h1{
+    border-top: 1px solid var(--color5);
+    border-bottom: 1px solid var(--color5);
 }
 
 div#request_friend form div input{
-    width: 117px;
+    width: 128px;
+
+    margin: 10px 0px 0px 0px;
 
     text-align: center;
 
@@ -394,9 +435,79 @@ div#request_friend form button{
     left: 50%;
 
     transform: translate(-50%);
+
+    padding: 1px;
+
+    cursor: pointer;
+
+    box-shadow: .5px .5px rgba(0, 0, 0, 0.267);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.39);
+
+    color: var(--color2);
+    background-color: var(--color4);
+}
+
+div#request_friend form button:hover{
+
+    color: var(--color1);
+    background-color: var(--color3);
 }
 
 div#request_friend p{
     margin: 6px 0px 0px 0px;
     text-align: center;
+}
+
+/* friends */
+
+section#friends_section{
+    width: 400px;
+    
+    margin: auto;
+
+    background-color: var(--color2);
+}
+
+section#friends_section ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+
+    border: 1px solid var(--color5);
+}
+
+span#show_friends_span{
+    margin-left: 10px;
+}
+
+span#show_friends_span h2{
+
+    font: bolder 1.5em var(--fontText);
+}
+
+span#show_friends_span h3{
+
+    font: bold 1em var(--fontText)
+}
+
+span#show_friends_span h4{
+
+    font: normal 0.8em var(--fontText)
+}
+
+span#see_friend_task_span a{
+    margin-right: 10px;
+    text-align: center;
+    font-size: 3em;
+
+    color: var(--color4);
+}
+
+span#see_friend_task_span a:visited{
+    color: var(--color4);
+}
+
+span#see_friend_task_span a:hover{
+    color: var(--color3);
 }
