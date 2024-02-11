@@ -15,10 +15,10 @@
     <div id="login" class="register_login">
         <form action="/login" method="post">
             <div>
-                <input autocomplete="off" required autofocus name="user" placeholder="Usuário" type="text">
+                <input autocomplete="off" required min="5" max="20" autofocus name="user" placeholder="Usuário" type="text">
             </div>
             <div>
-                <input autocomplete="off" required autofocus name="password" placeholder="Senha" type="password">
+                <input autocomplete="off" required min="10" max="20" autofocus name="password" placeholder="Senha" type="password">
             </div>
             <button type="submit">Logar</button>
         </form>

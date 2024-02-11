@@ -19,6 +19,26 @@ function hide_span(){
     }
 }
 
+//--> header
+
+function hideHeader() {
+    var header = document.getElementById("main-header");
+    header.classList.add("hidden");
+}
+
+// Função para mostrar o cabeçalho
+function showHeader() {
+    var header = document.getElementById("main-header");
+    header.classList.remove("hidden");
+}
+
+// Chamar a função para ocultar o cabeçalho assim que a página carregar
+window.onload = function() {
+    setTimeout(function() {
+        hideHeader();
+    }, 2000); // Ocultar o cabeçalho após 3 segundos (3000 milissegundos)
+};
+
 //-->Index
 function priorityColor() {
     const taskRows = document.querySelectorAll('.table_task_tr');

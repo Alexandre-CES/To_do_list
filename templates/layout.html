@@ -13,7 +13,7 @@
 <body>
 
     {% if not hide_header %}
-    <header>
+    <header id="main-header">
         {% block header %}
             
         {% endblock %}
@@ -49,8 +49,12 @@
                         <i class="bi bi-person-plus"></i>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url_for('configs') }}">
+                        <i class="bi bi-gear"></i>
+                    </a>
+                </li>
             </ul>
-        
     </menu>
     {% endblock %}
 </body>

@@ -36,6 +36,60 @@ div.outside_div_top{
     background-color: var(--color5);
 }
 
+/* -->global tags */
+
+/* header */
+header{
+    margin: auto;
+    padding: 0px 0px 5px 0px;
+    text-align: center;
+    
+    text-shadow: 3px 3px rgba(0, 0, 0, 0.37);
+
+    font: bold 2em var(--fontTitle);
+    color: var(--color1);
+    background-color: var(--color5);
+
+    transition: .5s ease;
+}
+
+header.hidden {
+    transform: translateY(-100%);
+}
+
+/* apology */
+section#apology{
+    height: 100vh;
+    margin: auto;
+
+    text-align: center;
+
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.486);
+
+    color: var(--color4);
+    background-color: var(--color2);
+}
+
+section#apology h1{
+
+    margin: auto;
+    text-align: center;
+
+    font: bolder 3em var(--fontTitle);
+}
+
+section#apology img{
+
+    border: 1px solid var(--color5);
+}
+
+section#apology h2{
+
+
+    color: var(--color5);
+    font: bold 2em var(--fontText);
+}
+
 /* register / login */
 div#register{
     width: 300px;
@@ -118,7 +172,7 @@ div.register_login p a:hover{
     color: var(--color1);
 }
 
-/* menu */
+/* menus */
 menu#side_menu{
     position: fixed;
     top: 0;
@@ -134,6 +188,8 @@ menu#side_menu{
 
 div#span_side_menu{
     width: 100%;
+
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.562);
 
     padding: 10px 0px 0px 10px;
 }
@@ -171,18 +227,6 @@ ul#side_menu_ul > li >a{
 
     text-decoration: none;
     color: var(--color2);
-}
-
-header{
-    margin: 0px auto -10px;
-    text-align: center;
-    padding-top: 10px;
-    
-    text-shadow: 3px 3px rgba(0, 0, 0, 0.37);
-
-    font: bold 2em var(--fontTitle);
-    color: var(--color1);
-    background-color: var(--color5);
 }
 
 /* table */
@@ -327,7 +371,6 @@ section#add_friends_section{
     justify-content: space-between;
 
     width: 400px;
-    height: 500px;
     margin: auto;
 
     position: relative;
@@ -349,6 +392,8 @@ div#show_requests{
 
     top: 0;
     left: 0;
+
+    min-height: 98px;
 
     border: 1px solid var(--color5);
 
@@ -462,6 +507,7 @@ div#request_friend p{
 
 section#friends_section{
     width: 400px;
+    min-height: 63px;
     
     margin: auto;
 
@@ -510,4 +556,43 @@ span#see_friend_task_span a:visited{
 
 span#see_friend_task_span a:hover{
     color: var(--color3);
+}
+
+/* configs */
+
+section#config_section{
+    width: 400px;
+    margin: auto;
+
+    background-color: var(--color2);
+}
+
+section#config_section h1{
+
+    text-align: center;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.418);
+    color: var(--color2);
+    background-color: var(--color4);
+}
+
+section#config_section h2{
+    padding: 10px;
+
+    color: var(--color4);
+}
+
+section#config_section h2 strong{
+
+    color: var(--color5);
+}
+
+section#config_section h2 a{
+
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.425);
+    color: rgb(255, 54, 54);
+    text-decoration: none;
+}
+
+section#config_section h2 a:hover{
+    color: rgb(255, 120, 120);
 }

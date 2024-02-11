@@ -1,10 +1,15 @@
 {% extends "layout.html" %}
-{% block head %} <title>Desculpas</title> {% endblock %}
+
+{% block head %}
+{{ super() }}
+<title>Desculpas</title> 
+{% endblock %}
+
 {% block menu %} {% endblock %}
-{% block header %} {% endblock %}
+{% block header %}{% endblock %}
 
 {% block main %}
-<div>
+<section id="apology">
 
     <h1>{{ top }}</h1>
 
@@ -12,5 +17,5 @@
 
     <h2>{{ bottom }}</h2>
 
-</div>
+</section>
 {% endblock %}

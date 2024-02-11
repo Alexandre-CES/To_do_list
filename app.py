@@ -68,11 +68,18 @@ def register():
         user = request.form.get('user')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
-
-        if not username or not user or not password or not confirm_password:
+            
+        if not user or not password or not confirm_password:
             return apology('Preencha os campos vazios', 403)
+        elif not username:
+            username = user
         elif password != confirm_password:
             return apology('As senhas devem ser iguais', 403)
+        
+        if len(user) < 5 or len(user) > 20:
+            return apology('usuário precisa ter no mínimo 5 e no máximo 20 dígitos', 403)
+        elif len(password) < 10 or len(password) > 20:
+            return apology('senha precisa ter no mínimo 10 e no máximo 20 dígitos', 403)
         
         repeat_user = db.session.query(User).filter_by(user=user).first()
         if repeat_user:
@@ -310,6 +317,48 @@ def reject_friend_request(request_id):
     db.session.delete(request)
     db.session.commit()
     return redirect(url_for('add_friend'))
+
+@app.route('/configs')
+@login_required
+def configs():
+
+    id = session['user_id']
+
+    user = User.query.filter_by(id=id).first()
+
+    return render_template('configs.html', user=user)
+
+@app.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+
+    id = session['user_id']
+
+    if request.method == 'POST':
+        
+        old_password = request.form.get('old_password')
+        new_password = request.form.get('new_password')
+        confirm_new_password = request.form.get('confirm_new_password')
+
+        if not old_password or not new_password or not confirm_new_password:
+            return apology('preencha os campos vazios', 403)
+        elif new_password != confirm_new_password:
+            return apology('a senha de confirmação e a nova senha estão diferentes', 403)
+        
+        user_info = User.query.filter_by(id=id).first()
+
+        if not user_info or not check_password_hash(user_info.hashed_password, old_password):
+            return apology('Credenciais inválias', 403)
+        
+        new_hashed_password = generate_password_hash(new_password)
+
+        user_info.hashed_password = new_hashed_password
+        db.session.commit()
+
+        return redirect(url_for('configs'))
+
+    else:
+        return render_template('change_password.html', hide_header=True)
 
 #Para erros de servidor: Made by chatgpt3.5
 for code, exception in default_exceptions.items():
