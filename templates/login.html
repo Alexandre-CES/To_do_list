@@ -2,7 +2,7 @@
 
 {% block head %} 
 {{ super() }}
-
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>Login</title> 
 {% endblock %}
 
@@ -11,11 +11,11 @@
 
 {% block main %}
 
-<div class="register_login_background">
-    <div id="login" class="register_login">
-        <form action="/login" method="post">
+<div class="user_form_background">
+    <div id="login" class="user_form">
+        <form action="/login" method="post" autocomplete="off">
             <div>
-                <input autocomplete="off" required min="5" max="20" autofocus name="user" placeholder="Usuário" type="text">
+                <input  required autocomplete="off" min="5" max="20" autofocus name="user" placeholder="Usuário" type="text">
             </div>
             <div>
                 <input autocomplete="off" required min="10" max="20" autofocus name="password" placeholder="Senha" type="password">

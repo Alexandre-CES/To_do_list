@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Flask, request, redirect, render_template, url_for, session
+from flask import Flask, request, redirect, render_template, url_for, session, make_response
 
 #gerenciar sessões
 from flask_session import Session
@@ -120,8 +120,15 @@ def login():
 
         return redirect(url_for('index'))
     else:
-        return render_template('login.html', hide_header=True)
+        response = make_response(render_template('login.html', hide_header=True))
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        return response
 
+@app.route('/logout')
+@login_required
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 @app.route('/')
 @login_required
@@ -327,6 +334,32 @@ def configs():
     user = User.query.filter_by(id=id).first()
 
     return render_template('configs.html', user=user)
+
+@app.route('/change_username', methods=['GET', 'POST'])
+@login_required
+def change_username():
+
+    id = session['user_id']
+
+    if request.method == 'POST':
+        
+        new_username = request.form.get('new_username')
+        password = request.form.get('password')
+
+        if not new_username or not password:
+            return apology('Preencha os todos os campos', 403)
+
+        user_info = User.query.filter_by(id=id).first()
+
+        if not check_password_hash(user_info.hashed_password, password):
+            return apology('Credenciais inválidas', 403)
+        else:
+            user_info.username = new_username
+            db.session.commit()
+            return redirect(url_for('configs'))
+
+    else:
+        return render_template('change_username.html', hide_header=True)
 
 @app.route('/change_password', methods=['GET', 'POST'])
 @login_required

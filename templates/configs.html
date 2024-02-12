@@ -23,7 +23,10 @@
     <h1>Informações do usuário</h1>
     <h2><strong>Nome:</strong> {{ user['username'] }}</h2>
     <h2><strong>Usuário:</strong> {{ user['user'] }}</h2>
-    <h2><a href="{{ url_for('change_password') }}">Trocar senha</a></h2>
+    <h1>Ações</h1>
+    <h2><a class="change_account_info_settings" href="{{ url_for('change_username') }}">Trocar nome</a></h2>
+    <h2><a class="change_account_info_settings" href="{{ url_for('change_password') }}">Trocar senha</a></h2>
+    <h2><a id="logout" href="{{ url_for('logout') }}">Deslogar</a></h2>
 </section>
 
 {% endblock %}

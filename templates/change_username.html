@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block head %}
+{{ super() }}
+    <title>Mudar nome</title>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+{{ super() }}
+
+<div class="user_form_background">
+    <div class="user_form">
+        <form action="/change_username" method="post">
+            <div>
+                <input type="text" autocomplete="off" autofocus placeholder="Novo nome" name="new_username" id="new_username">
+            </div>
+            <div>
+                <input type="password" autocomplete="off" required min="10" max="20" placeholder="Senha" name="password" id="password">
+            </div>
+            <button type="submit">Trocar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block menu %}{% endblock %}

@@ -90,7 +90,7 @@ section#apology h2{
     font: bold 2em var(--fontText);
 }
 
-/* register / login */
+/* User Form (register/login/change_passsword/change_username) */
 div#register{
     width: 300px;
     height: 320px;
@@ -101,14 +101,14 @@ div#login{
     height: 230px;
 }
 
-div.register_login_background{
+div.user_form_background{
     width: 100vw;
     height: 100vh;
 
     background-image: linear-gradient(to bottom, var(--color3) 10%, var(--color1) 100%);
 }
 
-div.register_login{
+div.user_form{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -120,12 +120,12 @@ div.register_login{
     background-image: linear-gradient(to bottom, var(--color5) 70%, var(--color4) 100%);
 }
 
-div.register_login form div{
+div.user_form form div{
     margin: 10px 0px 0px 0px;
     text-align: center;
 }
 
-div.register_login form div input{
+div.user_form form div input{
     height: 40px;
     padding: 1px 10px;
 
@@ -133,7 +133,7 @@ div.register_login form div input{
     background-color: var(--color2);
 }
 
-div.register_login form button{
+div.user_form form button{
     position: relative;
     left: 50%;
     transform: translate(-50%);
@@ -148,14 +148,14 @@ div.register_login form button{
     background-color: var(--color2);
 }
 
-div.register_login p{
+div.user_form p{
     text-align: center;
 
     text-shadow: 1px 1px rgba(0, 0, 0, 0.363);
     color: var(--color1);
 }
 
-div.register_login p a{
+div.user_form p a{
     text-align: center;
     
     text-decoration: none;
@@ -165,7 +165,7 @@ div.register_login p a{
     color: var(--color2);
 }
 
-div.register_login p a:hover{
+div.user_form p a:hover{
 
     font:bolder;
 
@@ -587,12 +587,31 @@ section#config_section h2 strong{
 }
 
 section#config_section h2 a{
-
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.425);
-    color: rgb(255, 54, 54);
     text-decoration: none;
 }
 
-section#config_section h2 a:hover{
+a.change_account_info_settings{
+
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.425);
+    color: rgb(255, 54, 54);
+}
+
+a.change_account_info_settings:hover{
     color: rgb(255, 120, 120);
+}
+
+a#logout{
+    
+    padding: 5px;
+
+    border-radius: 15px;
+
+    color: var(--color1);
+    background-color: var(--color5);
+}
+
+a#logout:hover{
+
+    color: var(--color2);
+    background-color: var(--color4);
 }
