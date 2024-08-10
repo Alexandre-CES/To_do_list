@@ -1,4 +1,6 @@
-Lista com de tarefas com recursos:
+# Lista com de tarefas
+
+## O que pode ser feito
 
 1. Registro / Login:
  -salvar tarefas na conta
@@ -17,3 +19,13 @@ Lista com de tarefas com recursos:
 
 5. Sessão:
  -salvar de onde parou, se não for feito o logout
+
+## Intruções para executar o projeto
+
+1. Clone o repositório
+    ```bash
+    git clone https://github.com/Alexandre-CES/to_do_list.git
+
+2. Execute o projeto
+    ```bash
+    python app.py
