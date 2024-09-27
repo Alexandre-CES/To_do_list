@@ -26,6 +26,10 @@
     ```bash
     git clone https://github.com/Alexandre-CES/to_do_list.git
 
+2. Instale as dependências:
+    ```bash
+    pip install -r requirements.txt
+
 2. Execute o projeto
     ```bash
     python app.py
