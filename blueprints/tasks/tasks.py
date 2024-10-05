@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 from flask import Blueprint,request
 from helpers.helpers import *
 from datetime import datetime

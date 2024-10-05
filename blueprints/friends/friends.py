@@ -1,11 +1,11 @@
 from flask import Blueprint,request, redirect, url_for, session, render_template
-from app import db
+from extensions import db
 from models import *
 from helpers.helpers import *
 
 bp = Blueprint('friends', __name__)
 
-@bp.route('/friends', endpoint='friends_f')
+@bp.route('/friends', endpoint='friends')
 @login_required
 def friends_f():
 

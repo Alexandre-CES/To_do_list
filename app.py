@@ -3,28 +3,22 @@ from flask_session import Session
 from configs.config import Config
 from werkzeug.exceptions import default_exceptions
 from helpers.helpers import login_required, apology
-from flask_sqlalchemy import SQLAlchemy
+from models import *
+from extensions import db
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
+db.init_app(app)
 Session(app)
-db = SQLAlchemy(app)
-
-from routes.account import bp as account_bp
-from routes.friends import bp as friends_bp
-from routes.tasks import bp as tasks_bp
 
 # Registrar os blueprints
+from blueprints.account.account import bp as account_bp
+from blueprints.friends.friends import bp as friends_bp
+from blueprints.tasks.tasks import bp as tasks_bp
 app.register_blueprint(account_bp)
 app.register_blueprint(friends_bp)
 app.register_blueprint(tasks_bp)
-
-from models import *
-
-#ter certeza de que a tabela existe
-with app.app_context():
-    db.create_all()
 
 @app.route('/', endpoint='index')
 @login_required

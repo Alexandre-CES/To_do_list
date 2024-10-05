@@ -1,10 +1,10 @@
-from app import db
+from extensions import db
 from models import User
 from flask import Blueprint, request, redirect, url_for, session, make_response
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers.helpers import *
 
-bp = Blueprint('account', __name__)
+bp = Blueprint('account', __name__, template_folder='../templates')
 
 @bp.route('/register', endpoint='register', methods=['GET', 'POST'])
 def register():
@@ -74,7 +74,7 @@ def login():
 @login_required
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('account.login'))
 
 @bp.route('/change_username', endpoint='change_username', methods=['GET', 'POST'])
 @login_required
