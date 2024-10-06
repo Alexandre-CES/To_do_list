@@ -37,7 +37,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('login'))
+        return redirect(url_for('account.login'))
     else:
         return render_template('register.html', hide_header=True)
 
@@ -97,7 +97,7 @@ def change_username():
         else:
             user_info.username = new_username
             db.session.commit()
-            return redirect(url_for('configs'))
+            return redirect(url_for('account.configs'))
 
     else:
         return render_template('change_username.html', hide_header=True)
@@ -129,7 +129,7 @@ def change_password():
         user_info.hashed_password = new_hashed_password
         db.session.commit()
 
-        return redirect(url_for('configs'))
+        return redirect(url_for('account.configs'))
 
     else:
         return render_template('change_password.html', hide_header=True)

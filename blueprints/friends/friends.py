@@ -72,7 +72,7 @@ def add_friend():
             return apology('Está tentando enviar um pedido para você mesmo?', 403)
         #no caso de enviar mais de uma vez
         elif friend_request:
-            return redirect(url_for('add_friend'))
+            return redirect(url_for('friends.add_friend'))
         #no caso de já ter recebido uma solicitação da pessoa que enviou
         elif received_request:
             already_friends = Friend.query.filter_by(user_id=id, friend_id=requested_id).first()
@@ -95,7 +95,7 @@ def add_friend():
                 db.session.add(new_request)
                 db.session.commit()
 
-        return redirect(url_for('add_friend'))
+        return redirect(url_for('friends.add_friend'))
     else:
         #tabela que contém usuários que enviaram pedido
         requests = []
@@ -125,7 +125,7 @@ def accept_friend_request(request_id):
     db.session.add(new_friend)
     db.session.commit()
 
-    return redirect(url_for('add_friend'))
+    return redirect(url_for('friends.add_friend'))
 
 #recusar solicitação de amizade
 @bp.route('/reject_friend_request/<int:request_id>', endpoint='reject_friend_request')
@@ -137,4 +137,4 @@ def reject_friend_request(request_id):
     request =  Request.query.filter_by(user_id=request_id, requested_id=id).first()
     db.session.delete(request)
     db.session.commit()
-    return redirect(url_for('add_friend'))
+    return redirect(url_for('friends.add_friend'))
